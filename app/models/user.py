@@ -1,4 +1,5 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .db import db, environment, SCHEMA
+from .collaborator import collaborators
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -16,6 +17,14 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     business_name = db.Column(db.String(255), nullable=False)
+
+    board = db.relationship('Board', back_populates='owner')
+    user_collaborators = db.relationship(
+        "Board",
+        secondary=collaborators,
+        back_populates="board_collaborators")
+    #not sure this is necessary:
+    comments_written = db.relationship("Comment", back_populates="author")
 
     @property
     def password(self):
