@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
         "Board",
         secondary=collaborators,
         back_populates="board_collaborators")
-    #not sure this is necessary:
+    #not sure this is necessary bc might not need this:
     comments_written = db.relationship("Comment", back_populates="author")
 
     @property
