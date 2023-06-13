@@ -2,7 +2,7 @@ from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-# Adds a demo user, you can add other users here if you want
+# Adds a demo user, you can add other users here if you want(make site's demo user Marnie, who will have bobbie and jennifer as collaborators)
 def seed_users():
     demo = User(
         username='Demo', email='demo@aa.io', password='password', first_name='Demo', last_name='User', business_name='Demo LLC')
@@ -10,10 +10,14 @@ def seed_users():
         username='marnie', email='marnie@aa.io', password='password', first_name='Marnie', last_name='Nguyen', business_name='Demo LLC')
     bobbie = User(
         username='bobbie', email='bobbie@aa.io', password='password', first_name='Robert', last_name='Smith', business_name='Demo LLC')
+    jennifer = User(
+        username='jennifer', email='jennifer@aa.io', password='password', first_name='Jennifer', last_name='Jones', business_name='Demo LLC')
+
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(jennifer)
     db.session.commit()
 
 
