@@ -1,5 +1,4 @@
-from app.models import db, environment, SCHEMA
-from app.models.list import List
+from app.models import db, environment, SCHEMA, List
 from sqlalchemy.sql import text
 
 def seed_lists():

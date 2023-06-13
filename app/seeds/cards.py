@@ -1,5 +1,4 @@
-from app.models import db, environment, SCHEMA
-from app.models.board import Card
+from app.models import db, environment, SCHEMA, Card
 from sqlalchemy.sql import text
 from datetime import date
 

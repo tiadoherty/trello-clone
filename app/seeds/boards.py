@@ -1,5 +1,4 @@
-from app.models import db, environment, SCHEMA
-from app.models.board import Board
+from app.models import db, environment, SCHEMA, Board
 from sqlalchemy.sql import text
 
 def seed_boards():
