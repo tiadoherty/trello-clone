@@ -46,7 +46,7 @@ function SignupFormModal() {
 			formData.append("first_name", firstName)
 			formData.append("last_name", lastName)
 			formData.append("business_name", businessName)
-			formData.append("hashed_password", password)
+			formData.append("password", password)
 
 			console.log("Form Data gathered from signup form:")
 			for (let key of formData.entries()) {
