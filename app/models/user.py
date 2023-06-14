@@ -44,5 +44,6 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'business_name': self.business_name
+            'business_name': self.business_name,
+            'collaborators': [board.to_dict() for board in self.user_collaborators]
         }

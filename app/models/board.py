@@ -26,6 +26,5 @@ class Board(db.Model):
             "title": self.title,
             "background_image": self.background_image,
             "owner": self.owner.to_dict(),
-            "collaborators": [user.to_dict() for user in self.board_collaborators],
             "lists": [list.to_dict() for list in self.lists]
         }
