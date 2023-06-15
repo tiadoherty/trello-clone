@@ -5,6 +5,7 @@ import { getUserBoardsThunk } from "../../store/boardReducer"
 import BoardCard from "./components/BoardCard";
 import './CurrentBoardsPage.css'
 import OpenModalButton from "../OpenModalButton";
+import CreateBoardModal from "../CreateBoardModal";
 
 const CurrentBoardsPage = () => {
     //get boards of current user?
@@ -26,7 +27,7 @@ const CurrentBoardsPage = () => {
             <ul className="board-card-container">
                 <OpenModalButton
                     buttonText="Create new board"
-                    modalComponent={<h1>Create board</h1>}
+                    modalComponent={<CreateBoardModal />}
                     className="create-new-board-button"
                 />
                 {userBoardsArray.map((board) => <BoardCard board={board} />)}

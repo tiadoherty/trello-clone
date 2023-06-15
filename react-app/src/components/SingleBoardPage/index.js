@@ -13,7 +13,7 @@ const SingleBoardPage = () => {
 
     useEffect(() => {
         dispatch(getSingleBoardThunk(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
     console.log("Single board", singleBoard)
 

@@ -4,6 +4,7 @@ import { normalizeObj } from './helpers';
 const GET_USER_BOARDS = 'boards/getUserBoards'
 const GET_COLLAB_BOARDS = 'boards/getCollabBoards'
 const GET_SINGLE_BOARD = 'boards/getSingleBoard'
+const CREATE_BOARD = 'boards/createBoard'
 
 // ---------- ACTION CREATORS ----------
 const getUserBoards = (boards) => {
@@ -23,6 +24,13 @@ const getCollabBoards = (collaborator_boards) => {
 const getSingleBoard = (board) => {
     return {
         type: GET_SINGLE_BOARD,
+        board
+    }
+}
+
+const createBoard = (board) => {
+    return {
+        type: CREATE_BOARD,
         board
     }
 }
@@ -67,19 +75,41 @@ export const getSingleBoardThunk = (id) => async (dispatch) => {
     }
 }
 
+// create a board
+export const createBoardThunk = (boardFormData) => async (dispatch) => {
+    const res = await fetch(`/api/boards/current`, {
+        method: "POST",
+        body: boardFormData
+    })
+
+    if (res.ok) {
+        const { board } = await res.json()
+        dispatch(createBoard(board))
+        return board;
+    } else {
+        const errors = await res.json()
+        console.log("errors from create board thunk -->", errors)
+        return errors
+    }
+
+
+}
+
 
 // --------- INITIAL STATE -------------
-const initialState = {userBoards: {}, collabBoards: {}, singleBoard: {}}
+const initialState = { userBoards: {}, collabBoards: {}, singleBoard: {} }
 
 // ---------- REDUCER ----------
 const boardReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_USER_BOARDS:
-            return {...state, userBoards: {...normalizeObj(action.boards)}}
+            return { ...state, userBoards: { ...normalizeObj(action.boards) } }
         case GET_COLLAB_BOARDS:
-            return {...state, collabBoards: {...normalizeObj(action.collaborator_boards)}}
+            return { ...state, collabBoards: { ...normalizeObj(action.collaborator_boards) } }
         case GET_SINGLE_BOARD:
-            return {...state, singleBoard: {...action.board}}
+            return { ...state, singleBoard: { ...action.board } }
+        case CREATE_BOARD:
+            return { ...state, userBoards: { ...state.userBoards, [action.board.id]: action.board } }
         default:
             return state
     }

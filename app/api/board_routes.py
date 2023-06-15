@@ -88,6 +88,7 @@ def create_board():
             title = data["title"],
             background_image = data["background_image"],
             owner_id = current_user.id
+            
         )
 
         db.session.add(new_board)
