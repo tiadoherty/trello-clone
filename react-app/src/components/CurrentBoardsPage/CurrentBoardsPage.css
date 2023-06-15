@@ -1,0 +1,28 @@
+.board-card-container {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.create-new-board-button {
+    cursor: pointer;
+    color: rgb(182, 194, 207);
+    background-color: rgba(161, 189, 217, 0.08);
+    border: none;
+    border-radius: 3px;
+}
+
+
+.page {
+    padding: 20px;
+    background-color: rgb(29, 33, 37);
+    color: rgb(182, 194, 207);
+    box-sizing: border-box;
+    height: 100vw;
+}
+
+.page-title {
+    margin-top: 0;
+}

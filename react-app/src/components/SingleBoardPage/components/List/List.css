@@ -1,0 +1,23 @@
+.list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 25px;
+    background-color: rgb(29, 33, 37);
+    padding: 16px;
+    margin: 10px;
+}
+
+.list-container h4 {
+    margin: 10px;
+}
+
+.add-card {
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-card:hover {
+    background-color: rgba(161, 189, 217, 0.08);
+}

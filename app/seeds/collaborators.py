@@ -1,4 +1,4 @@
-from app.models import db, collaborators, User, Board, environment, SCHEMA
+from app.models import db, collaborators, environment, SCHEMA
 from sqlalchemy import insert
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql import text

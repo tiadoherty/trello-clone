@@ -1,0 +1,32 @@
+.card {
+    background-color: rgba(161, 189, 217, 0.08);
+    color: rgb(182, 194, 207);
+    padding: 8px 8px 4px 12px;
+    border-radius: 5px;
+    margin: 8px 0;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.card-icon-container {
+    display: flex;
+}
+
+.card-icon {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.card-comment>i {
+    margin: 6px 5px 4px 0;
+}
+
+.card-title {
+    color: rgb(182, 194, 207);
+    margin: 0 0 4px;
+    font-size: 14px;
+}
