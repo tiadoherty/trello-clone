@@ -6,17 +6,6 @@ from app.forms import BoardForm, EditBoardForm
 board_routes = Blueprint("boards", __name__)
 
 
-def validation_errors_to_error_messages(validation_errors):
-    """
-    Simple function that turns the WTForms validation errors into a simple list
-    """
-    errorMessages = []
-    for field in validation_errors:
-        for error in validation_errors[field]:
-            errorMessages.append(f"{field} : {error}")
-    return errorMessages
-
-
 # get boards owned by current user
 @board_routes.route("/current")
 @login_required
@@ -115,7 +104,7 @@ def create_board():
         print("form errors coming from the backend in the POST route -->", form.errors)
         return {"errors": form.errors}, 400, {"Content-Type": "application/json"}
 
-# edit an existing board 
+# edit an existing board
 @board_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
 def edit_board(id):
