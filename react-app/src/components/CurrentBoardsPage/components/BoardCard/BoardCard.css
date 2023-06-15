@@ -9,12 +9,26 @@
     justify-content: space-between;
 }
 
+
+.fas {
+    color: white;
+}
+
+.fas:hover {
+   color: black;
+}
+
 .overlay {
     position: relative;
 }
 
 .board-card-title {
     margin: 0;
+    color: white;
+}
+
+.board-card-title:hover{
+    color: black;
 }
 
 .no-underline {

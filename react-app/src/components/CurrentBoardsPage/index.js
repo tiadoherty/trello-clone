@@ -30,7 +30,7 @@ const CurrentBoardsPage = () => {
                     modalComponent={<CreateBoardModal />}
                     className="create-new-board-button"
                 />
-                {userBoardsArray.map((board) => <BoardCard board={board} />)}
+                {userBoardsArray.map((board) => <BoardCard board={board} key={board.id} />)}
             </ul>
         </div>
     )

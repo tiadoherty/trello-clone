@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import CurrentBoardsPage from "./components/CurrentBoardsPage";
 import SingleBoardPage from "./components/SingleBoardPage";
+import AddMemberPage from "./components/AddMemberPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,11 +28,14 @@ function App() {
             <Route path="/signup">
               <SignupFormPage />
             </Route>
-            <Route path="/boards/current">
+            <Route exact path="/boards/current">
               <CurrentBoardsPage />
             </Route>
-            <Route path="/boards/:id">
+            <Route exact path="/boards/:id">
               <SingleBoardPage />
+            </Route>
+            <Route exact path="/boards/:id/add-member">
+              <AddMemberPage />
             </Route>
           </Switch>
         </>

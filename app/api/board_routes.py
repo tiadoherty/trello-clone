@@ -70,6 +70,7 @@ def delete_board(id):
     """
     Query for one board by its id and delete it from the database
     """
+    print("Board ID from backend delete route -->", id)
     board = Board.query.get(id)
 
     if board is None:
@@ -80,8 +81,9 @@ def delete_board(id):
 
     db.session.delete(board)
     db.session.commit()
+    return {"message": "Succesfully Deleted"}
 
-
+# create a board
 @board_routes.route("/current", methods=["POST"])
 @login_required
 def create_board():
@@ -113,7 +115,7 @@ def create_board():
         print("form errors coming from the backend in the POST route -->", form.errors)
         return {"errors": form.errors}, 400, {"Content-Type": "application/json"}
 
-
+# edit an existing board 
 @board_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
 def edit_board(id):
