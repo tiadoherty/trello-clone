@@ -87,9 +87,9 @@ export const createBoardThunk = (boardFormData) => async (dispatch) => {
         dispatch(createBoard(board))
         return board;
     } else {
-        const errors = await res.json()
-        console.log("errors from create board thunk -->", errors)
-        return errors
+        const data = await res.json()
+        console.log("errors from create board thunk -->", data)
+        return data
     }
 
 

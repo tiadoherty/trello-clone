@@ -6,6 +6,17 @@ from app.forms import BoardForm, EditBoardForm
 board_routes = Blueprint("boards", __name__)
 
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f"{field} : {error}")
+    return errorMessages
+
+
 # get boards owned by current user
 @board_routes.route("/current")
 @login_required
@@ -70,25 +81,25 @@ def delete_board(id):
     db.session.delete(board)
     db.session.commit()
 
+
 @board_routes.route("/current", methods=["POST"])
 @login_required
 def create_board():
     """
     Create a new board via a form and add it to the database
     """
-    #make form from imported class
+    # make form from imported class
     form = BoardForm()
-    #form csrf
+    # form csrf
     form["csrf_token"].data = request.cookies["csrf_token"]
-    #if form passes validations, use form.data to create a new board and add to the db then return
+    # if form passes validations, use form.data to create a new board and add to the db then return
     if form.validate_on_submit():
         data = form.data
 
         new_board = Board(
-            title = data["title"],
-            background_image = data["background_image"],
-            owner_id = current_user.id
-            
+            title=data["title"],
+            background_image=data["background_image"],
+            owner_id=current_user.id,
         )
 
         db.session.add(new_board)
@@ -97,10 +108,11 @@ def create_board():
         print("this is the new board from the backend -->", new_board)
         return {"board": new_board.to_dict()}, 200, {"Content-Type": "application/json"}
 
-    #if form errors, return those errors
+    # if form errors, return those errors
     if form.errors:
         print("form errors coming from the backend in the POST route -->", form.errors)
         return {"errors": form.errors}, 400, {"Content-Type": "application/json"}
+
 
 @board_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
@@ -109,9 +121,9 @@ def edit_board(id):
     Edit an existing board by id and update it in the db
     """
     form = EditBoardForm()
-    #form csrf
+    # form csrf
     form["csrf_token"].data = request.cookies["csrf_token"]
-    #if form passes validations, find existing project and update, then add to the db then return
+    # if form passes validations, find existing project and update, then add to the db then return
     if form.validate_on_submit():
         data = form.data
         update_board = Board.query.get(id)
@@ -129,8 +141,12 @@ def edit_board(id):
 
         db.session.commit()
         print("this is the updated board from the backend -->", update_board)
-        return {"board": update_board.to_dict()}, 200, {"Content-Type": "application/json"}
-    #if form errors, return those errors
+        return (
+            {"board": update_board.to_dict()},
+            200,
+            {"Content-Type": "application/json"},
+        )
+    # if form errors, return those errors
     if form.errors:
         print("form errors coming from the backend in PUT route -->", form.errors)
         return {"errors": form.errors}, 400, {"Content-Type": "application/json"}

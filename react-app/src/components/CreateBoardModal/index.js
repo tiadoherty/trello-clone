@@ -17,6 +17,9 @@ const image_urls = [
     "https://kickstarterclonebucket.s3.us-west-1.amazonaws.com/background_purple.jpg"
 ]
 
+function removeSpaces(str) {
+    return str.replaceAll(' ', '').length
+}
 
 const CreateBoardModal = () => {
     const dispatch = useDispatch();
@@ -29,8 +32,8 @@ const CreateBoardModal = () => {
     useEffect(() => {
         const errors = {}
 
+        if (removeSpaces(title) === 0) errors["title"] = "❗Characters are required in the title"
         if (!title.length) errors["title"] = "👋 Board title is required"
-
         setErrors(errors)
     }, [title])
 
@@ -49,9 +52,15 @@ const CreateBoardModal = () => {
         }
 
         const data = await dispatch(createBoardThunk(formData))
-        // TODO - handle errors
-        history.push(`/boards/${data.id}`)
-        closeModal()
+        console.log("response from thunk in front end form --->", data)
+        // if there are backend errors, set those errors otherwise redirect to the newly created board
+        if ('errors' in data) {
+            console.log('The backend returned validation errors when creating a new board -->', data)
+            setErrors(data.errors)
+        } else {
+            history.push(`/boards/${data.id}`)
+            closeModal()
+        }
     }
 
     return (

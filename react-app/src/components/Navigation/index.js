@@ -13,7 +13,9 @@ function Navigation({ isLoggedIn }) {
 				<NavLink exact to="/" className='logo-text'><i class="fab fa-trello"></i> NotTrello</NavLink>
 			</div>
 			<div className='right-buttons-container'>
-				<NavLink exact to="/boards/current" className='my-boards-text'>My Boards</NavLink>
+				{sessionUser && (
+					<NavLink exact to="/boards/current" className='my-boards-text'>My Boards</NavLink>
+				)}
 				{isLoggedIn && (
 					<ProfileButton user={sessionUser} />
 				)}

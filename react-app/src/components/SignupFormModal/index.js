@@ -5,6 +5,14 @@ import { signUp } from "../../store/session";
 import { useHistory } from "react-router-dom"
 import "./SignupForm.css";
 
+function containsWhitespace(str) {
+	return /\s/.test(str);
+}
+
+function removeSpaces(str) {
+	return str.replaceAll(' ', '').length
+}
+
 function SignupFormModal() {
 	const dispatch = useDispatch();
 	const history = useHistory()
@@ -23,11 +31,16 @@ function SignupFormModal() {
 		const errors = {}
 
 		if (username.length < 4) errors["username"] = "❗Please make sure your username is more than 4 characters"
+		if (containsWhitespace(username)) errors["username"] = "❗Please do not include spaces in your username"
 		if (!username.length) errors["username"] = "👋 Username is required"
 		if (!firstName.length) errors["firstName"] = "👋 First name is required"
+		if (containsWhitespace(firstName)) errors["firstName"] = "❗Please do not include spaces in your first name"
 		if (!lastName.length) errors["lastName"] = "👋 Last name is required"
+		if (containsWhitespace(lastName)) errors["lastName"] = "❗Please do not include spaces in your last name"
 		if (!businessName.length) errors["businessName"] = "👋 Please indicated what business you will be using NotTrello for"
+		if (removeSpaces(businessName) === 0) errors["businessName"] = "❗Please include characters in addition to spaces in your business's name"
 		if (!email.includes('@') || !email.includes('.')) errors["email"] = "❗Please include a valid email"
+		if (password.length < 6 || containsWhitespace(password)) errors["password"] = "❗Password must be at least 6 characters long and cannot contain spaces"
 		if (password !== confirmPassword) errors["password"] = "❗password and confirm password do not match"
 
 		setErrors(errors)
