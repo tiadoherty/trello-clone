@@ -48,7 +48,8 @@ def get_single_board(id):
     # if board.owner_id != current_user.id:
     #     return {"errors": "Forbidden"}, 401
 
-    return board.to_dict()
+    res = board.to_dict()
+    return {"single_board": res}
 
 
 # delete single board by id

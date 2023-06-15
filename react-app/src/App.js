@@ -5,26 +5,36 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import CurrentBoardsPage from "./components/CurrentBoardsPage";
+import SingleBoardPage from "./components/SingleBoardPage";
 
 function App() {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    dispatch(authenticate()).then(() => setIsLoaded(true));
+    dispatch(authenticate()).then(() => setIsLoggedIn(true));
   }, [dispatch]);
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
+      {isLoggedIn && (
+        <>
+          <Navigation isLoggedIn={isLoggedIn} />
+          <Switch>
+            <Route path="/login" >
+              <LoginFormPage />
+            </Route>
+            <Route path="/signup">
+              <SignupFormPage />
+            </Route>
+            <Route path="/boards/current">
+              <CurrentBoardsPage />
+            </Route>
+            <Route path="/boards/:id">
+              <SingleBoardPage />
+            </Route>
+          </Switch>
+        </>
       )}
     </>
   );
