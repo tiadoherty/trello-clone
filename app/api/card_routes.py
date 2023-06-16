@@ -65,8 +65,8 @@ def create_card():
         db.session.add(new_card)
         db.session.commit()
 
-        print("this is the new list from the backend -->", new_card)
-        return {"list": new_card.to_dict()}, 200, {"Content-Type": "application/json"}
+        print("this is the new card from the backend -->", new_card)
+        return {"card": new_card.to_dict()}, 200, {"Content-Type": "application/json"}
 
     # if form errors, return those errors
     if form.errors:
@@ -78,7 +78,7 @@ def create_card():
 @card_routes.route("/<int:id>/edit", methods=["PUT"])
 def update_card(id):
     """
-    Edit an existing list by id and update it in the db
+    Edit an existing card by id and update it in the db
     """
     form = CardForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
@@ -106,7 +106,7 @@ def update_card(id):
         db.session.commit()
         print("this is the updated list from the backend -->", update_card)
         return (
-            {"list": update_card.to_dict()},
+            {"card": update_card.to_dict()},
             200,
             {"Content-Type": "application/json"},
         )

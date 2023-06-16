@@ -10,6 +10,7 @@ const DELETE_BOARD = 'boards/deleteBoard'
 const CREATE_LIST = 'lists/createList'
 const EDIT_LIST = 'lists/editList'
 const DELETE_LIST = 'lists/deleteList'
+const CREATE_CARD = 'cards/createCard'
 
 // ---------- ACTION CREATORS ----------
 const getUserBoards = (boards) => {
@@ -74,6 +75,13 @@ const deleteList = (id) => {
     return {
         type: DELETE_LIST,
         id
+    }
+}
+
+const createCard = (card) => {
+    return {
+        type: CREATE_CARD,
+        card
     }
 }
 
@@ -222,6 +230,24 @@ export const deleteListThunk = (id) => async (dispatch) => {
     }
 }
 
+//create a card in a list
+export const createCardThunk = (cardFormData) => async (dispatch) => {
+    const res = await fetch('/api/cards/new-card', {
+        method: "POST",
+        body: cardFormData
+    })
+
+    if (res.ok) {
+       const { card } = await res.json()
+       dispatch(createCard(card))
+       return card;
+    } else {
+        const data = await res.json()
+        console.log("errors from create card thunk -->", data)
+        return data
+    }
+}
+
 
 // --------- INITIAL STATE -------------
 const initialState = { userBoards: {}, collabBoards: {}, singleBoard: {} }
@@ -249,6 +275,9 @@ const boardReducer = (state = initialState, action) => {
             return { ...state, singleBoard: { ...state.singleBoard, lists: [...state.singleBoard.lists.filter(list => list.id !== action.id), action.list] } }
         case DELETE_LIST:
             return { ...state, singleBoard: { ...state.singleBoard, lists: [...state.singleBoard.lists.filter(list => list.id !== action.id)] } }
+        case CREATE_CARD:
+            //TO DO: how do I key into the cards???
+            return {...state, singleBoard: {...state.singleBoard}}
         default:
             return state
     }

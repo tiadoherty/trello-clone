@@ -3,6 +3,7 @@ import './List.css'
 import OpenModalButton from '../../../OpenModalButton';
 import DeleteListModal from '../DeleteListModal';
 import EditListModal from '../EditListModal';
+import CreateCardModal from '../CreateCardModal';
 
 const List = ({ list }) => {
     console.log("List", list)
@@ -14,19 +15,23 @@ const List = ({ list }) => {
                     <div className='list-icon-container'>
                         <OpenModalButton
                             buttonText={<i className="list-icon fas fa-pen" />}
-                            modalComponent={<EditListModal list={list}/>}
+                            modalComponent={<EditListModal list={list} />}
                             className="modal-button"
                         />
                         <OpenModalButton
                             buttonText={<i className="list-icon fas fa-trash" />}
-                            modalComponent={<DeleteListModal list={list}/>}
+                            modalComponent={<DeleteListModal list={list} />}
                             className="modal-button"
                         />
                     </div>
                 </div>
                 {list.cards.map((card) => <Card card={card} />)}
             </div>
-            <div className='add-card'><i className="fas fa-plus" /> Add a card</div>
+            <OpenModalButton
+                buttonText={<><i className="fas fa-plus" /> Add a card</>}
+                modalComponent={<CreateCardModal listId={list.id} />}
+                className="add-card"
+            />
         </li>
     )
 }
