@@ -7,6 +7,8 @@ const GET_SINGLE_BOARD = 'boards/getSingleBoard'
 const CREATE_BOARD = 'boards/createBoard'
 const EDIT_BOARD = 'board/editBoard'
 const DELETE_BOARD = 'boards/deleteBoard'
+const CREATE_LIST = 'lists/createList'
+const EDIT_LIST = 'lists/editList'
 
 // ---------- ACTION CREATORS ----------
 const getUserBoards = (boards) => {
@@ -48,6 +50,21 @@ const editBoard = (board, id) => {
 const deleteBoard = (id) => {
     return {
         type: DELETE_BOARD,
+        id
+    }
+}
+
+const createList = (list) => {
+    return {
+        type: CREATE_LIST,
+        list
+    }
+}
+
+const editList = (list, id) => {
+    return {
+        type: EDIT_LIST,
+        list,
         id
     }
 }
@@ -94,7 +111,7 @@ export const getSingleBoardThunk = (id) => async (dispatch) => {
 
 // create a board
 export const createBoardThunk = (boardFormData) => async (dispatch) => {
-    const res = await fetch(`/api/boards/current`, {
+    const res = await fetch('/api/boards/current', {
         method: "POST",
         body: boardFormData
     })
@@ -145,6 +162,42 @@ export const deleteBoardThunk = (id) => async dispatch => {
     }
 }
 
+//create a list in a board
+export const createListThunk = (listFormData) => async (dispatch) => {
+    const res = await fetch('/api/lists/new-list', {
+        method: "POST",
+        body: listFormData
+    })
+
+    if (res.ok) {
+        const { list } = await res.json()
+        dispatch(createList(list))
+        return list;
+    } else {
+        const data = await res.json()
+        console.log("errors from create list thunk -->", data)
+        return data
+    }
+}
+
+//edit a list
+export const editListThunk = (id, listFormData) => async (dispatch) => {
+    const res = await fetch(`/api/lists/${id}/edit`, {
+        method: "POST",
+        body: listFormData
+    })
+
+    if (res.ok) {
+        const { list } = await res.json()
+        dispatch(editList(list, id))
+        return list;
+    } else {
+        const data = await res.json()
+        console.log("errors from create list thunk -->", data)
+        return data
+    }
+}
+
 
 // --------- INITIAL STATE -------------
 const initialState = { userBoards: {}, collabBoards: {}, singleBoard: {} }
@@ -166,6 +219,8 @@ const boardReducer = (state = initialState, action) => {
             const newState = Object.assign({}, state)
             delete newState.userBoards[action.id]
             return { ...state, userBoards: { ...newState.userBoards } }
+        case CREATE_LIST:
+            return {...state, singleBoard: {...state.singleBoard, lists: [...state.singleBoard.lists, action.list]}}
         default:
             return state
     }

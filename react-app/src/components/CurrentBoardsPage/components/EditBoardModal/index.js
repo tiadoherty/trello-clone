@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { useModal } from "../../context/Modal";
+import { useModal } from "../../../../context/Modal";
 import { useHistory } from "react-router-dom";
-import { editBoardThunk } from "../../store/boardReducer";
+import { editBoardThunk } from "../../../../store/boardReducer";
 import TrelloOverlay from '../CreateBoardModal/trello_overlay.svg'
 
 const image_urls = [

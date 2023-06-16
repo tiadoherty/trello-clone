@@ -18,7 +18,7 @@ class Board(db.Model):
         secondary=collaborators,
         back_populates="user_collaborators"
     )
-    lists = db.relationship("List", back_populates="board")
+    lists = db.relationship("List", back_populates="board", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

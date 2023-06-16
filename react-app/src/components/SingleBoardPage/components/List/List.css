@@ -12,6 +12,31 @@
     margin: 10px;
 }
 
+
+.list-header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+}
+
+
+.list-icon {
+    margin-right: 5px;
+    color: white;
+}
+
+.list-icon-container {
+    display: flex;
+
+}
+
+.list-icon:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
 .add-card {
     padding: 8px;
     border-radius: 5px;

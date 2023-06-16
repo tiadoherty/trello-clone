@@ -12,12 +12,12 @@ const BoardCard = ({ board }) => {
             <ul className='board-card-icon-container'>
                 {/* <Link to={`/boards/${board.id}/add-member`}><li className='board-card-icon'><i className="fas fa-user-plus" /></li></Link> */}
                 <OpenModalButton
-                    buttonText={<i className="fas fa-pen" />}
+                    buttonText={<i className="fas fa-pen board-card-icon" />}
                     modalComponent={<EditBoardModal boardId={board.id} />}
                     className="modal-button"
                 />
                 <OpenModalButton
-                    buttonText={<i className="fas fa-trash" />}
+                    buttonText={<i className="fas fa-trash board-card-icon" />}
                     modalComponent={<DeleteBoardModal boardId={board.id} />}
                     className="modal-button"
                 />

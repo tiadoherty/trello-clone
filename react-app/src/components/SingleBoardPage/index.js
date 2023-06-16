@@ -30,11 +30,6 @@ const SingleBoardPage = () => {
 
     console.log("Single board", singleBoard)
 
-    const handleAddList = () => {
-        // TODO
-        console.log("ADD LIST BUTTON CLICKED")
-    }
-
     if (Object.keys(singleBoard).length === 0) return <h1>Loading board...</h1>
 
     return (
@@ -46,7 +41,7 @@ const SingleBoardPage = () => {
                 {singleBoard.lists.map((list) => <List list={list} />)}
                 <OpenModalButton
                     buttonText={<><i className="fas fa-plus" /> Add another list</>}
-                    modalComponent={<CreateListModal />}
+                    modalComponent={<CreateListModal boardId={id}/>}
                     className="add-list"
                 />
             </ul>
