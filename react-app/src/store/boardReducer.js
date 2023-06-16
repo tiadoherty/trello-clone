@@ -9,6 +9,7 @@ const EDIT_BOARD = 'board/editBoard'
 const DELETE_BOARD = 'boards/deleteBoard'
 const CREATE_LIST = 'lists/createList'
 const EDIT_LIST = 'lists/editList'
+const DELETE_LIST = 'lists/deleteList'
 
 // ---------- ACTION CREATORS ----------
 const getUserBoards = (boards) => {
@@ -65,6 +66,13 @@ const editList = (list, id) => {
     return {
         type: EDIT_LIST,
         list,
+        id
+    }
+}
+
+const deleteList = (id) => {
+    return {
+        type: DELETE_LIST,
         id
     }
 }
@@ -183,7 +191,7 @@ export const createListThunk = (listFormData) => async (dispatch) => {
 //edit a list
 export const editListThunk = (id, listFormData) => async (dispatch) => {
     const res = await fetch(`/api/lists/${id}/edit`, {
-        method: "POST",
+        method: "PUT",
         body: listFormData
     })
 
@@ -194,6 +202,22 @@ export const editListThunk = (id, listFormData) => async (dispatch) => {
     } else {
         const data = await res.json()
         console.log("errors from create list thunk -->", data)
+        return data
+    }
+}
+
+//delete a list
+export const deleteListThunk = (id) => async (dispatch) => {
+    const res = await fetch(`/api/lists/${id}`, {
+        method: "DELETE"
+    })
+
+    if (res.ok) {
+        dispatch(deleteList(id))
+        console.log("successfully deleted list from thunk")
+    } else {
+        const data = await res.json()
+        console.log("errors from delete list thunk -->", data)
         return data
     }
 }
@@ -220,7 +244,11 @@ const boardReducer = (state = initialState, action) => {
             delete newState.userBoards[action.id]
             return { ...state, userBoards: { ...newState.userBoards } }
         case CREATE_LIST:
-            return {...state, singleBoard: {...state.singleBoard, lists: [...state.singleBoard.lists, action.list]}}
+            return { ...state, singleBoard: { ...state.singleBoard, lists: [...state.singleBoard.lists, action.list] } }
+        case EDIT_LIST:
+            return { ...state, singleBoard: { ...state.singleBoard, lists: [...state.singleBoard.lists.filter(list => list.id !== action.id), action.list] } }
+        case DELETE_LIST:
+            return { ...state, singleBoard: { ...state.singleBoard, lists: [...state.singleBoard.lists.filter(list => list.id !== action.id)] } }
         default:
             return state
     }

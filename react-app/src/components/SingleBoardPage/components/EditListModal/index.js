@@ -53,8 +53,21 @@ const EditListModal = ({ list }) => {
     }
 
     return (
-        <div>
-            <h1>Edit List Here: </h1>
+        <div className="edit-list-container">
+            <form onSubmit={handleSubmit} className='list-form'>
+                <label className='list-title-field'>
+                    Update list title...
+                    <input
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                        style={errors.title && { boxShadow: 'rgb(239, 92, 72) 0px 0px 0px 2px inset' }}
+                    />
+                    <span className='error-field'>{errors.title}</span>
+                </label>
+                <button type="submit" className='create-button'>Update List</button>
+            </form>
         </div>
     )
 }
