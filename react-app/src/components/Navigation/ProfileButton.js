@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const history = useHistory()
+  const sessionUser = useSelector(state => state.session.user);
+  console.log("USER", sessionUser)
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -31,16 +35,28 @@ function ProfileButton({ user }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
+    closeMenu()
     dispatch(logout());
+    history.push('/')
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
+  if (!sessionUser) {
+    return <OpenModalButton
+      buttonText="Log In"
+      onItemClick={closeMenu}
+      modalComponent={<LoginFormModal />}
+      className="nav-login"
+    />
+  }
+
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className="profile-button" onClick={openMenu}>
+        {sessionUser.first_name[0].toUpperCase()}
+        {sessionUser.last_name[0].toUpperCase()}
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
@@ -48,7 +64,7 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <button className="logout-button" onClick={(e) => handleLogout(e)}>Log Out</button>
             </li>
           </>
         ) : (

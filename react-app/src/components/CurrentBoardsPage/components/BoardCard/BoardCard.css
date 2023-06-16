@@ -15,7 +15,7 @@
 }
 
 .fas:hover {
-   color: black;
+    color: black;
 }
 
 .overlay {
@@ -27,7 +27,7 @@
     color: white;
 }
 
-.board-card-title:hover{
+.board-card-title:hover {
     color: black;
 }
 
@@ -44,4 +44,14 @@
 
 .board-card-icon {
     margin: 0 8px;
+}
+
+.modal-button {
+    display: flex;
+    background: none;
+    height: 22px;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }

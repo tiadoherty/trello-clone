@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { signUp } from "../../store/session";
+import { login, signUp } from "../../store/session";
 import { useHistory } from "react-router-dom"
 import "./SignupForm.css";
 
@@ -80,10 +80,17 @@ function SignupFormModal() {
 		}
 	};
 
+	const handleDemoButtonClick = async () => {
+		await dispatch(login('marnie@aa.io', 'password'))
+		closeModal()
+		history.push('/boards/current')
+	}
+
 	return (
-		<>
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
+		<div className="signup-modal">
+			<h2><i className="fab fa-trello"></i>NotTrello</h2>
+			<h4 className="signup-title">Sign up to continue</h4>
+			<form onSubmit={handleSubmit} className="signup-form">
 				<ul className="errors">
 					{submitted && Object.values(errors).map((error, idx) => (
 						<li key={idx}>{error}</li>
@@ -126,7 +133,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Please indicate the name of the business you will be tracking projects for:
+					Business Name
 					<input
 						type="text"
 						value={businessName}
@@ -152,9 +159,10 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
-				<button type="submit">Sign Up</button>
+				<button type="submit" className="signup-button">Sign Up</button>
 			</form>
-		</>
+			<button className="signup-button demo" onClick={() => handleDemoButtonClick()}>Demo User</button>
+		</div>
 	);
 }
 

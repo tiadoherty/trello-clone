@@ -117,9 +117,9 @@ export const editBoardThunk = (id, newBoardData) => async (dispatch) => {
         body: newBoardData
     })
 
-    if(res.ok) {
+    if (res.ok) {
         const { board } = await res.json()
-        dispatch(editBoard(board))
+        dispatch(editBoard(board, id))
         return board;
     } else {
         const data = await res.json()
@@ -161,14 +161,11 @@ const boardReducer = (state = initialState, action) => {
         case CREATE_BOARD:
             return { ...state, userBoards: { ...state.userBoards, [action.board.id]: action.board } }
         case EDIT_BOARD:
-            const newEditState = {...state}
-            newEditState.userBoards[action.id] = action.board
-            return newEditState
+            return { ...state, userBoards: { ...state.userBoards, [action.id]: action.board } }
         case DELETE_BOARD:
-            const newState = { ...state }
-            //do I need to delete from another place too? collab boards?
-            newState.userBoards[action.id] = action.board
-            return newState
+            const newState = Object.assign({}, state)
+            delete newState.userBoards[action.id]
+            return { ...state, userBoards: { ...newState.userBoards } }
         default:
             return state
     }

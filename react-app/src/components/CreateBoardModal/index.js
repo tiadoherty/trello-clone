@@ -75,7 +75,7 @@ const CreateBoardModal = () => {
                 <p>Background</p>
                 <div className="thumbnail-container">
                     {image_urls.map((url) => {
-                        return <button onClick={() => setSelectedImageUrl(url)} className="background_thumbnail" style={{ 'background-image': `url(${url})`, 'objectFit': 'contain' }}></button>
+                        return <button onClick={() => setSelectedImageUrl(url)} className="background_thumbnail" style={{ backgroundImage: `url(${url})`, 'objectFit': 'contain' }}></button>
                     })}
                 </div>
                 <form onSubmit={handleSubmit} className='board-form'>

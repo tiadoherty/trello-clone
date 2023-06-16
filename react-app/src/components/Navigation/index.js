@@ -10,7 +10,7 @@ function Navigation({ isLoggedIn }) {
 	return (
 		<div className='navbar-container'>
 			<div className='logo-container'>
-				<NavLink exact to="/" className='logo-text'><i class="fab fa-trello"></i> NotTrello</NavLink>
+				<NavLink exact to="/" className='logo-text'><i className="fab fa-trello"></i> NotTrello</NavLink>
 			</div>
 			<div className='right-buttons-container'>
 				{sessionUser && (

@@ -1,0 +1,74 @@
+.signup-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Nunito Sans', sans-serif;
+    min-width: 500px;
+}
+
+.signup-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 20px;
+    width: 80%;
+}
+
+.signup-modal i {
+    color: rgb(237, 80, 180);
+    margin-right: 8px;
+}
+
+.errors {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+}
+
+.signup-title {
+    margin: 16px 0;
+}
+
+.signup-form label {
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.signup-form input {
+    height: 20px;
+}
+
+.signup-button {
+    font-family: 'Nunito Sans', sans-serif;
+    margin: 4px 0;
+    height: 32px;
+    border-radius: 3px;
+    background-color: rgb(0, 82, 204);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 100%;
+    color: white;
+    cursor: pointer;
+}
+
+.signup-button:hover {
+    background-color: rgb(7, 71, 166);
+}
+
+.demo {
+    background-color: darkgray;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.demo:hover {
+    background-color: gray;
+}

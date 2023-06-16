@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 45px;
   background-color: rgb(29, 33, 37);
   backdrop-filter: blur(6px);
@@ -27,12 +28,72 @@
   border: 1px solid rgb(182, 194, 207);
   border-radius: 5px;
   padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-dropdown {
   position: absolute;
+  color: rgb(182, 194, 207);
+  background-color: rgb(40, 46, 51);
+  border-radius: 3px;
+  border: 1px solid rgb(182, 194, 207);
+  list-style: none;
+  padding: 12px;
+  top: 55px;
+  right: 20px;
+  margin: 0;
+}
+
+.profile-dropdown li {
+  margin: 10px 0;
 }
 
 .hidden {
   display: none;
+}
+
+.nav-login {
+  font-family: 'Nunito Sans', sans-serif;
+  padding: 8px 16px;
+  background-color: rgb(0, 101, 255);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.nav-login:hover {
+  background-color: rgb(7, 71, 166);
+}
+
+.profile-button {
+  background-color: orange;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+}
+
+.profile-button:hover {
+  border: 2px solid rgba(161, 189, 217, 0.08);
+}
+
+.logout-button {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  border: none;
+  background: none;
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  color: rgb(182, 194, 207);
+  border-top: 1px solid rgb(182, 194, 207);
+  padding-top: 8px;
+  cursor: pointer;
 }

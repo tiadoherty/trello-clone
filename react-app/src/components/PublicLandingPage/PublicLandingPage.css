@@ -8,7 +8,7 @@
     padding: 30px;
 }
 
-.left-grid{
+.left-grid {
     margin-right: 20px;
 }
 
@@ -16,19 +16,19 @@
     width: 550px;
 }
 
-.home-page-header{
+.home-page-header {
     color: white;
     font-size: 48px;
     font-family: 'Nunito Sans', sans-serif;
 }
 
-.home-page-text{
+.home-page-text {
     color: white;
     font-size: 20px;
     font-family: 'Nunito Sans', sans-serif;
 }
 
-.signup-button-landing{
+.signup-button-landing {
     width: 165px;
     height: 50px;
     font-size: 16px;
@@ -37,4 +37,11 @@
     border: 1px solid rgb(0, 101, 255);
     border-radius: 5px;
     color: white;
+    font-weight: normal;
+}
+
+.signup-button-landing:hover {
+    background-color: rgb(7, 71, 166);
+    border: 1px solid rgb(7, 71, 166);
+    cursor: pointer;
 }
