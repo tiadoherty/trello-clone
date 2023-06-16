@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from flask_login import login_required, current_user
+from flask_login import login_required
 from app.models import List, db
 from app.forms import ListForm
 
@@ -79,7 +79,7 @@ def update_list(id):
     form = ListForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    # if form passes validations, find existing project and update, then add to the db then return
+    # if form passes validations, find existing list and update, then add to the db then return
     if form.validate_on_submit():
         data = form.data
         update_list = List.query.get(id)
