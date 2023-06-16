@@ -1,0 +1,40 @@
+.landing-page-container {
+    background: linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180))
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 30px;
+}
+
+.left-grid{
+    margin-right: 20px;
+}
+
+.home-page-image {
+    width: 550px;
+}
+
+.home-page-header{
+    color: white;
+    font-size: 48px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.home-page-text{
+    color: white;
+    font-size: 20px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.signup-button-landing{
+    width: 165px;
+    height: 50px;
+    font-size: 16px;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(0, 101, 255);
+    border: 1px solid rgb(0, 101, 255);
+    border-radius: 5px;
+    color: white;
+}

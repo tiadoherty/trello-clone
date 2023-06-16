@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import CurrentBoardsPage from "./components/CurrentBoardsPage";
 import SingleBoardPage from "./components/SingleBoardPage";
 import AddMemberPage from "./components/AddMemberPage";
+import PublicLandingPage from "./components/PublicLandingPage"
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ function App() {
         <>
           <Navigation isLoggedIn={isLoggedIn} />
           <Switch>
+          <Route exact path="/" >
+              <PublicLandingPage />
+            </Route>
             <Route path="/login" >
               <LoginFormPage />
             </Route>
