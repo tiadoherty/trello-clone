@@ -1,7 +1,7 @@
 from flask import Blueprint, request
-from flask_login import login_required
-from app.models import Card, db
-from app.forms import CardForm
+from flask_login import login_required, current_user
+from app.models import Card, Comment, db
+from app.forms import CardForm, CommentForm
 
 card_routes = Blueprint("cards", __name__)
 
@@ -19,7 +19,7 @@ def get_single_card(id):
         return {"errors": "This Card could not be found"}, 404
 
     res = card.to_dict()
-    return {"single_card": card}
+    return {"single_card": res}
 
 
 # delete single card by id
@@ -115,3 +115,16 @@ def update_card(id):
     if form.errors:
         print("form errors coming from the backend in PUT route -->", form.errors)
         return {"errors": form.errors}, 400, {"Content-Type": "application/json"}
+
+
+#get comments by card id
+@card_routes.route("/<int:id>/comments")
+@login_required
+def get_card_comments(id):
+    """
+    Query for one card's comments by its id and returns the comments in a list
+    """
+    card = Card.query.get(id).to_dict()
+
+    return {"comments": card["comments"]}
+
