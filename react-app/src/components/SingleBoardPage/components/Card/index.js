@@ -10,6 +10,11 @@ const Card = ({ card, listId }) => {
             <div className="card-color" style={{ backgroundColor: card.cover_image }}></div>
             <div className='card-top'>
                 <p className='card-title'>{card.title}</p>
+                {/* TODO: change title into a modal button that opens the single card for viewing - should look like the edit form but without functionality */}
+                {/* <OpenModalButton
+                        buttonText={card.title}
+                        modalComponent={<SingleCardModal card={card} listId={listId} />}
+                        className="card-title"></OpenModalButton> */}
                 <div className='card-icon-container'>
                     <OpenModalButton
                         buttonText={<i className="fas fa-pen" />}
