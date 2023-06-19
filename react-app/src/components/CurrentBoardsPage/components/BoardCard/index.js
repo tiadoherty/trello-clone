@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
+import EditBoardModal from '../EditBoardModal'
 
 import OpenModalButton from '../../../OpenModalButton'
-import EditBoardModal from '../../../EditBoardModal'
-import DeleteBoardModal from '../../../DeleteBoardModal'
+// import EditBoardModal from '../../../EditBoardModal'
+import DeleteBoardModal from '../DeleteBoardModal'
 import './BoardCard.css'
 
 const BoardCard = ({ board }) => {

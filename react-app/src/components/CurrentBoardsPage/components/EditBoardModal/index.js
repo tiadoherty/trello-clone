@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../../context/Modal";
 import { useHistory } from "react-router-dom";
 import { editBoardThunk } from "../../../../store/boardReducer";
-import TrelloOverlay from '../CreateBoardModal/trello_overlay.svg'
+// import TrelloOverlay from '../../CreateBoardModal/trello_overlay.svg'
+import TrelloOverlay from '../../../CreateBoardModal/trello_overlay.svg'
 
 const image_urls = [
     "https://kickstarterclonebucket.s3.us-west-1.amazonaws.com/background_dolpin.jpg",
