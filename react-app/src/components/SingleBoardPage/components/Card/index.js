@@ -1,14 +1,24 @@
+import EditCardModal from '../EditCardModal'
+import DeleteCardModal from '../DeleteCardModal'
+import OpenModalButton from '../../../OpenModalButton'
 import './Card.css'
 
-const Card = ({ card }) => {
+const Card = ({ card, listId }) => {
     console.log("Card", card)
     return (
         <div className="card">
+            <div className="card-color" style={{ backgroundColor: card.cover_image }}></div>
             <div className='card-top'>
                 <p className='card-title'>{card.title}</p>
                 <div className='card-icon-container'>
-                    <span className='card-icon'><i className="fas fa-pen" /></span>
-                    <span className='card-icon'><i className="fas fa-trash" /></span>
+                    <OpenModalButton
+                        buttonText={<i className="fas fa-pen" />}
+                        modalComponent={<EditCardModal card={card} listId={listId} />}
+                        className="card-icon"></OpenModalButton>
+                    <OpenModalButton
+                        buttonText={<i className="fas fa-trash" />}
+                        modalComponent={<DeleteCardModal cardId={card.id} listId={listId}/>}
+                        className="card-icon"></OpenModalButton>
                 </div>
             </div>
             <div>

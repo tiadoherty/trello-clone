@@ -11,6 +11,12 @@
     justify-content: space-between;
 }
 
+.card-color {
+    height: 6px;
+    width: 20%;
+    border-radius: 3px;
+    margin-bottom: 4px;
+}
 
 .card-icon-container {
     display: flex;
@@ -19,6 +25,10 @@
 .card-icon {
     margin: 0 5px;
     cursor: pointer;
+    background: none;
+    border: none;
+    color: rgb(182, 194, 207);
+    display: flex;
 }
 
 .card-comment>i {

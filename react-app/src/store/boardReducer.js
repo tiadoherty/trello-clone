@@ -11,6 +11,8 @@ const CREATE_LIST = 'lists/createList'
 const EDIT_LIST = 'lists/editList'
 const DELETE_LIST = 'lists/deleteList'
 const CREATE_CARD = 'cards/createCard'
+const DELETE_CARD = 'cards/deleteCard'
+const EDIT_CARD = 'cards/editCard'
 
 // ---------- ACTION CREATORS ----------
 const getUserBoards = (boards) => {
@@ -78,10 +80,28 @@ const deleteList = (id) => {
     }
 }
 
-const createCard = (card) => {
+const createCard = (card, listId) => {
     return {
         type: CREATE_CARD,
-        card
+        card,
+        listId
+    }
+}
+
+const editCard = (card, cardId, listId) => {
+    return {
+        type: EDIT_CARD,
+        card,
+        cardId,
+        listId
+    }
+}
+
+const deleteCard = (cardId, listId) => {
+    return {
+        type: DELETE_CARD,
+        cardId,
+        listId
     }
 }
 
@@ -231,19 +251,53 @@ export const deleteListThunk = (id) => async (dispatch) => {
 }
 
 //create a card in a list
-export const createCardThunk = (cardFormData) => async (dispatch) => {
+export const createCardThunk = (cardFormData, listId) => async (dispatch) => {
     const res = await fetch('/api/cards/new-card', {
         method: "POST",
         body: cardFormData
     })
 
     if (res.ok) {
-       const { card } = await res.json()
-       dispatch(createCard(card))
-       return card;
+        const { card } = await res.json()
+        dispatch(createCard(card, listId))
+        return card;
     } else {
         const data = await res.json()
         console.log("errors from create card thunk -->", data)
+        return data
+    }
+}
+
+// Edit a card by passing cardFormData, cardId, and listId
+export const editCardThunk = (cardFormData, cardId, listId) => async (dispatch) => {
+    const res = await fetch(`/api/cards/${cardId}/edit`, {
+        method: "PUT",
+        body: cardFormData
+    })
+
+    if (res.ok) {
+        const { card } = await res.json()
+        dispatch(editCard(card, cardId, listId))
+        console.log("successfully deleted card from thunk")
+    } else {
+        const data = await res.json()
+        console.log("errors from delete list thunk -->", data)
+        return data
+    }
+}
+
+// Delete a card by its ID
+export const deleteCardThunk = (cardId, listId) => async (dispatch) => {
+    const res = await fetch(`/api/cards/${cardId}`, {
+        method: "DELETE"
+    })
+
+    if (res.ok) {
+        dispatch(deleteCard(cardId, listId))
+        console.log("successfully deleted card from thunk")
+    } else {
+        const data = await res.json()
+        console.log("errors from delete list thunk -->", data)
         return data
     }
 }
@@ -275,9 +329,26 @@ const boardReducer = (state = initialState, action) => {
             return { ...state, singleBoard: { ...state.singleBoard, lists: [...state.singleBoard.lists.filter(list => list.id !== action.id), action.list] } }
         case DELETE_LIST:
             return { ...state, singleBoard: { ...state.singleBoard, lists: [...state.singleBoard.lists.filter(list => list.id !== action.id)] } }
-        case CREATE_CARD:
-            //TO DO: how do I key into the cards???
-            return {...state, singleBoard: {...state.singleBoard}}
+        case CREATE_CARD: {
+            const newState = { ...state, singleBoard: { ...state.singleBoard, lists: [...state.singleBoard.lists] } }
+            const listToAdd = newState.singleBoard.lists.find(list => list.id === action.listId)
+            listToAdd.cards.push(action.card)
+            return newState
+        }
+        case DELETE_CARD: {
+            const newListState = { ...state, singleBoard: { ...state.singleBoard, lists: [...state.singleBoard.lists] } }
+            const listToDeleteFrom = newListState.singleBoard.lists.find(list => list.id === action.listId)
+            const cardToDeleteIndex = listToDeleteFrom.cards.findIndex((card) => card.id === action.cardId)
+            listToDeleteFrom.cards.splice(cardToDeleteIndex, 1)
+            return newListState
+        }
+        case EDIT_CARD: {
+            const newListState = { ...state, singleBoard: { ...state.singleBoard, lists: [...state.singleBoard.lists] } }
+            const listToDeleteFrom = newListState.singleBoard.lists.find(list => list.id === action.listId)
+            const cardToDeleteIndex = listToDeleteFrom.cards.findIndex((card) => card.id === action.cardId)
+            listToDeleteFrom.cards.splice(cardToDeleteIndex, 1, action.card)
+            return newListState
+        }
         default:
             return state
     }

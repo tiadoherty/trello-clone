@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../../context/Modal";
-import { createCardThunk } from "../../../../store/boardReducer";
-import './CreateCardModal.css'
+import { editCardThunk } from "../../../../store/boardReducer";
 
 function removeSpaces(str) {
     return str.replaceAll(' ', '').length
@@ -17,14 +16,20 @@ const coverImageOptions = [
     '#AF7AC5'
 ]
 
-const CreateCardModal = ({ listId, listTitle }) => {
-    console.log("is this the correct list id --->", listId)
+const formatDate = (dateString) => {
+    if (!dateString) return;
+    const date = new Date(dateString)
+    return date.toISOString().split('T')[0];
+}
+
+const EditCardModal = ({card, listId}) => {
+    console.log("card has list title??", card)
     const dispatch = useDispatch();
-    const [title, setTitle] = useState('')
+    const [title, setTitle] = useState(card.title)
     const [errors, setErrors] = useState({})
-    const [description, setDescription] = useState('')
-    const [dueDate, setDueDate] = useState('')
-    const [coverImage, setCoverImage] = useState('#A1BDD914')
+    const [description, setDescription] = useState(card.description)
+    const [dueDate, setDueDate] = useState(formatDate(card.due_date))
+    const [coverImage, setCoverImage] = useState(card.cover_image)
     const { closeModal } = useModal();
 
     useEffect(() => {
@@ -51,12 +56,12 @@ const CreateCardModal = ({ listId, listTitle }) => {
         formData.append('due_date', dueDate)
         formData.append('cover_image', coverImage)
 
-        console.log("Form Data gathered from create card form:")
+        console.log("Form Data gathered from edit card form:")
         for (let key of formData.entries()) {
             console.log(key[0] + ' ----> ' + key[1])
         }
 
-        const data = await dispatch(createCardThunk(formData, listId))
+        const data = await dispatch(editCardThunk(formData, card.id, listId))
         if ('errors' in data) {
             setErrors(data.errors)
         } else {
@@ -68,6 +73,7 @@ const CreateCardModal = ({ listId, listTitle }) => {
         <div className="create-card-background">
             <div className="cover-img-preview" style={{ backgroundColor: coverImage }}></div>
             <form onSubmit={handleSubmit} className='card-form'>
+            <p>Edit card details:</p>
                 <label className='card-title-field'>
                     Card title
                     <input
@@ -79,7 +85,7 @@ const CreateCardModal = ({ listId, listTitle }) => {
                     />
                     <span className='error-field'>{errors.title}</span>
                 </label>
-                <p>In list: {listTitle}</p>
+                <p>In list: {card.list_title}</p>
                 <label className='card-title-field'>
                     Cover color
                     <ul className="cover-image-container">
@@ -99,13 +105,18 @@ const CreateCardModal = ({ listId, listTitle }) => {
                 </label>
                 <label className='card-title-field'>
                     Description
-                    <textarea onChange={(e) => setDescription(e.target.value)} style={errors.description && { boxShadow: 'rgb(239, 92, 72) 0px 0px 0px 2px inset' }} />
+                    <textarea
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    style={errors.description && { boxShadow: 'rgb(239, 92, 72) 0px 0px 0px 2px inset' }}
+                    />
                     <span className='error-field'>{errors.description}</span>
                 </label>
-                <button type="submit" className='create-button'>Create</button>
+                <button type="submit" className='create-button'>Update</button>
             </form>
         </div>
     )
 }
 
-export default CreateCardModal
+
+export default EditCardModal

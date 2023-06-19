@@ -1,0 +1,57 @@
+.create-card-background {
+    background-color: rgb(29, 33, 37);
+}
+
+.card-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: rgba(161, 189, 217, 0.08);
+    color: rgb(182, 194, 207);
+}
+
+.cover-img-preview {
+    height: 80px;
+    width: 100%;
+}
+
+.card-title-field {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title-field input {
+    border: none;
+    background-color: rgb(34, 39, 43);
+    border-radius: 3px;
+    color: rgb(182, 194, 207);
+    outline: none;
+    margin-top: 4px;
+    height: 30px;
+}
+
+.card-title-field textarea {
+    border: none;
+    background-color: rgb(34, 39, 43);
+    border-radius: 3px;
+    color: rgb(182, 194, 207);
+    outline: none;
+    margin-top: 4px;
+}
+
+.cover-image-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    margin: 0;
+    padding: 0;
+}
+
+.cover-image-option {
+    margin: 4px;
+    height: 40px;
+    width: 64px;
+    border-radius: 3px;
+    cursor: pointer;
+}

@@ -25,11 +25,11 @@ const List = ({ list }) => {
                         />
                     </div>
                 </div>
-                {list.cards.map((card) => <Card card={card} />)}
+                {list.cards.map((card) => <Card card={card} listId={list.id}/>)}
             </div>
             <OpenModalButton
                 buttonText={<><i className="fas fa-plus" /> Add a card</>}
-                modalComponent={<CreateCardModal listId={list.id} />}
+                modalComponent={<CreateCardModal listId={list.id} listTitle={list.title} />}
                 className="add-card"
             />
         </li>

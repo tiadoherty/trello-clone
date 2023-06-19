@@ -29,7 +29,7 @@ def delete_card(id):
     """
     Query for one card by its id and delete it from the database
     """
-    card = card.query.get(id)
+    card = Card.query.get(id)
 
     if card is None:
         return {"errors": "This Card could not be found"}, 404
