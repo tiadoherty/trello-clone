@@ -270,6 +270,7 @@ export const createCardThunk = (cardFormData, listId) => async (dispatch) => {
 
 // Edit a card by passing cardFormData, cardId, and listId
 export const editCardThunk = (cardFormData, cardId, listId) => async (dispatch) => {
+    console.log("information received from the edit card thunk --->", cardFormData, cardId, listId)
     const res = await fetch(`/api/cards/${cardId}/edit`, {
         method: "PUT",
         body: cardFormData
@@ -278,7 +279,7 @@ export const editCardThunk = (cardFormData, cardId, listId) => async (dispatch) 
     if (res.ok) {
         const { card } = await res.json()
         dispatch(editCard(card, cardId, listId))
-        console.log("successfully deleted card from thunk")
+        return card;
     } else {
         const data = await res.json()
         console.log("errors from delete list thunk -->", data)
@@ -344,9 +345,9 @@ const boardReducer = (state = initialState, action) => {
         }
         case EDIT_CARD: {
             const newListState = { ...state, singleBoard: { ...state.singleBoard, lists: [...state.singleBoard.lists] } }
-            const listToDeleteFrom = newListState.singleBoard.lists.find(list => list.id === action.listId)
-            const cardToDeleteIndex = listToDeleteFrom.cards.findIndex((card) => card.id === action.cardId)
-            listToDeleteFrom.cards.splice(cardToDeleteIndex, 1, action.card)
+            const listToEditFrom = newListState.singleBoard.lists.find(list => list.id === action.listId)
+            const cardToEditIndex = listToEditFrom.cards.findIndex((card) => card.id === action.cardId)
+            listToEditFrom.cards.splice(cardToEditIndex, 1, action.card)
             return newListState
         }
         default:

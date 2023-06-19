@@ -22,7 +22,7 @@ const formatDate = (dateString) => {
     return date.toISOString().split('T')[0];
 }
 
-const EditCardModal = ({card, listId}) => {
+const EditCardModal = ({ card, listId }) => {
     console.log("card has list title??", card)
     const dispatch = useDispatch();
     const [title, setTitle] = useState(card.title)
@@ -62,6 +62,7 @@ const EditCardModal = ({card, listId}) => {
         }
 
         const data = await dispatch(editCardThunk(formData, card.id, listId))
+        console.log("return from thunk in the frontend component --->", data)
         if ('errors' in data) {
             setErrors(data.errors)
         } else {
@@ -73,7 +74,7 @@ const EditCardModal = ({card, listId}) => {
         <div className="create-card-background">
             <div className="cover-img-preview" style={{ backgroundColor: coverImage }}></div>
             <form onSubmit={handleSubmit} className='card-form'>
-            <p>Edit card details:</p>
+                <p>Edit card details:</p>
                 <label className='card-title-field'>
                     Card title
                     <input
@@ -106,9 +107,9 @@ const EditCardModal = ({card, listId}) => {
                 <label className='card-title-field'>
                     Description
                     <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    style={errors.description && { boxShadow: 'rgb(239, 92, 72) 0px 0px 0px 2px inset' }}
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        style={errors.description && { boxShadow: 'rgb(239, 92, 72) 0px 0px 0px 2px inset' }}
                     />
                     <span className='error-field'>{errors.description}</span>
                 </label>
