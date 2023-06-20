@@ -78,8 +78,8 @@ const SingleCardModal = ({ card }) => {
                 </ul>
             </div>
             <div className='write-comment-container'>
-                <textarea className='comment-text-area' value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
-                {hasSubmitted && !!Object.values(errors).length && <p>{errors.comment}</p>}
+                <textarea className='comment-text-area' value={comment} onChange={(e) => setComment(e.target.value)} placeholder='Add comment here...'></textarea>
+                {hasSubmitted && !!Object.values(errors).length && <p className='single-card-error'>{errors.comment}</p>}
                 <button className='add-comment-button' onClick={() => handleClick()}>Add comment</button>
             </div>
         </div>

@@ -6,6 +6,7 @@
     background-color: rgb(29, 33, 37);
     padding: 16px;
     margin: 10px;
+    min-width: 200px;
 }
 
 .list-container h4 {

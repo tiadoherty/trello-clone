@@ -6,6 +6,7 @@
     height: calc(100vh - 56px);
     min-height: 600px;
     width: 100%;
+    overflow-x: scroll;
 }
 
 .board-title>h2 {
@@ -31,6 +32,7 @@
     height: 48px;
     font-size: 16px;
     margin: 10px;
+    min-width: 200px;
 }
 
 .add-list:hover {

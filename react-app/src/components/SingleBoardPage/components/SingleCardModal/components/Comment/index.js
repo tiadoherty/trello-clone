@@ -57,8 +57,8 @@ const Comment = ({ comment, cardId }) => {
     if (isEditing) {
         return (
             <div className='edit-comment'>
-                <p>Edit comment below:</p>
-                <input type='text' value={editInput} onChange={(e) => setEditInput(e.target.value)} />
+                <p className='edit-comment-header'>Edit comment below:</p>
+                <input type='text' value={editInput} onChange={(e) => setEditInput(e.target.value)} className='comment-text-area'/>
                 {errors.comment && <p>{errors.comment}</p>}
                 <div className='comment-buttons'>
                     <button className='comment-single-button' onClick={() => handleEdit()}>Update</button>
