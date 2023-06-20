@@ -23,6 +23,7 @@ const Comment = ({ comment, cardId }) => {
     }, [editInput])
 
     const handleEdit = async () => {
+        if (Object.values(errors).length) return;
         const formData = new FormData()
         formData.append('comment', editInput)
         formData.append('card_id', cardId)
