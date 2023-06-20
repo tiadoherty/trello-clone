@@ -8,6 +8,7 @@
     padding: 20px;
     background-color: rgba(161, 189, 217, 0.08);
     color: rgb(182, 194, 207);
+    min-width: 290px;
 }
 
 .cover-img-preview {
@@ -29,6 +30,18 @@
     outline: none;
     margin-top: 4px;
     height: 30px;
+    padding: 3px 8px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    font-size: 18px;
+}
+
+::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .card-title-field textarea {
@@ -39,6 +52,8 @@
     outline: none;
     margin-top: 4px;
     height: 80px;
+    padding: 5px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .cover-image-container {
@@ -51,8 +66,7 @@
 
 .cover-image-option {
     margin: 4px;
-    height: 40px;
-    width: 64px;
+    height: 50px;
     border-radius: 3px;
     cursor: pointer;
 }

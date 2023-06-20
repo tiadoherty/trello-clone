@@ -7,7 +7,7 @@ import './Card.css'
 const Card = ({ card, listId }) => {
     console.log("Card", card)
     //const numComments = useSelector(state => state.boards.singleBoard.lists.find(list => list.id === listId).cards.length)
-    //TODO: might need to update the singleboard slice of state somehow so that num comments is working properly 
+    //TODO: might need to update the singleboard slice of state somehow so that num comments is working properly
     return (
         <div className="card">
             <div className="card-color" style={{ backgroundColor: card.cover_image }}></div>
@@ -18,11 +18,11 @@ const Card = ({ card, listId }) => {
                         className="card-title"></OpenModalButton>
                 <div className='card-icon-container'>
                     <OpenModalButton
-                        buttonText={<i className="fas fa-pen" />}
+                        buttonText={<i className="fas fa-pen card-icon" />}
                         modalComponent={<EditCardModal card={card} listId={listId} />}
                         className="card-icon"></OpenModalButton>
                     <OpenModalButton
-                        buttonText={<i className="fas fa-trash" />}
+                        buttonText={<i className="fas fa-trash card-icon" />}
                         modalComponent={<DeleteCardModal cardId={card.id} listId={listId}/>}
                         className="card-icon"></OpenModalButton>
                 </div>
