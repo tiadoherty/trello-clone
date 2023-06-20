@@ -1,0 +1,31 @@
+.create-list-container {
+    background-color: rgb(29, 33, 37);
+    color: rgb(182, 194, 207);
+    font-size: 16px;
+    min-width: 290px;
+}
+
+.create-list-inner-container {
+    background-color: rgba(161, 189, 217, 0.08);
+    width: 100%;
+    height: 100%;
+    padding: 15px 25px;
+    box-sizing: border-box;
+}
+
+.list-title-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-input-text {
+    padding: 3px;
+    margin: 5px 0;
+    padding: 8px 12px;
+    background-color: rgb(34, 39, 43);
+    border-radius: 3px;
+    color: rgb(182, 194, 207);
+    outline: none;
+    border: none;
+    height: 15px;
+}

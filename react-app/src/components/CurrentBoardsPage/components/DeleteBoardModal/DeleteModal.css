@@ -1,0 +1,47 @@
+.delete-modal-container {
+    background-color: rgb(29, 33, 37);
+    color: rgb(182, 194, 207);
+    font-size: 16px;
+}
+
+.delete-modal-inner-container {
+    background-color: rgba(161, 189, 217, 0.08);
+    width: 100%;
+    height: 100%;
+    padding: 15px 25px;
+    box-sizing: border-box;
+}
+
+.confirm-delete{
+    margin-top: 8px;
+}
+
+.delete-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.delete-button {
+    background-color: rgb(87, 157, 255);
+    padding: 6px 12px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: rgb(133, 184, 255);
+}
+
+.cancel-delete-button {
+    background-color: darkgray;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.cancel-delete-button:hover {
+    background-color: gray;
+}

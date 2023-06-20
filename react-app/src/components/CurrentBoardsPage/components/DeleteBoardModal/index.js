@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../../context/Modal";
 import { deleteBoardThunk } from "../../../../store/boardReducer";
+import './DeleteModal.css'
 
 const DeleteBoardModal = ({ boardId }) => {
     console.log("Board id prop?", boardId)
@@ -9,15 +10,17 @@ const DeleteBoardModal = ({ boardId }) => {
 
     const deleteProject = (e) => {
         dispatch(deleteBoardThunk(boardId))
-          .then(closeModal)
-      }
+            .then(closeModal)
+    }
 
     return (
         <div className="delete-modal-container">
-            <p>Confirm you would like to delete this board:</p>
-            <div className="button-container">
-                <button onClick={closeModal}>Cancel</button>
-                <button className="delete-button" onClick={deleteProject}>Delete</button>
+            <div className="delete-modal-inner-container">
+                <p className='confirm-delete'>Confirm you would like to delete this board:</p>
+                <div className="delete-button-container">
+                    <button onClick={closeModal} className="cancel-delete-button">Cancel</button>
+                    <button className="delete-button" onClick={deleteProject}>Delete</button>
+                </div>
             </div>
         </div>
     )

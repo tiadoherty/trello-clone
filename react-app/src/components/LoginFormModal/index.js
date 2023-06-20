@@ -33,10 +33,10 @@ function LoginFormModal() {
   return (
     <>
       <form className="login-form" onSubmit={handleSubmit}>
-        <h1>Log In</h1>
-        <ul className="error-container">
+        <h4 className="login-title" >Log in to NotTrello</h4>
+        <ul className="errors">
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li key={idx}>❗{error.split(': ')[1]}</li>
           ))}
         </ul>
         <label>
@@ -57,9 +57,9 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit" className="login-button">Log In</button>
+        <button onClick={() => handleDemoButtonClick()} className="demo-button">Log in as Demo User</button>
       </form>
-      <button onClick={() => handleDemoButtonClick()} className="demo-button">Log in as Demo User</button>
     </>
   );
 }

@@ -14,12 +14,14 @@ const DeleteListModal = ({ list }) => {
 
     return (
         <div className="delete-modal-container">
-            <p>Confirm you would like to delete this list:</p>
-            <div className="button-container">
-                <button onClick={closeModal}>Cancel</button>
-                <button className="delete-button" onClick={deleteList}>Delete</button>
+            <div className="delete-modal-inner-container">
+                <p className='confirm-delete'>Confirm you would like to delete this list:</p>
+                <div className="delete-button-container">
+                    <button onClick={closeModal} className="cancel-delete-button">Cancel</button>
+                    <button className="delete-button" onClick={deleteList}>Delete</button>
+                </div>
             </div>
-        </div>
+        </div >
     )
 }
 

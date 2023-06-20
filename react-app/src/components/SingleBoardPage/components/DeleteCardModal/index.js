@@ -16,14 +16,18 @@ const DeleteCardModal = ({ cardId, listId }) => {
     }
 
     return (
-        <div>
-            <h3>Are you sure you want to delete this card?</h3>
-            <button onClick={() => handleCancel()}>
-                No
-            </button>
-            <button onClick={() => handleConfirm()}>
-                Yes
-            </button>
+        <div className="delete-modal-container">
+            <div className="delete-modal-inner-container">
+                <p className='confirm-delete'>Are you sure you want to delete this card?</p>
+                <div className="delete-button-container">
+                    <button onClick={() => handleCancel()} className="cancel-delete-button">
+                        Cancel
+                    </button>
+                    <button onClick={() => handleConfirm()} className="delete-button">
+                        Delete
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }

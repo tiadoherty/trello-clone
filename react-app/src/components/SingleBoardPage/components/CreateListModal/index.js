@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../../context/Modal";
 import { createListThunk } from "../../../../store/boardReducer";
+import './CreateListModal.css'
 
 function removeSpaces(str) {
     return str.replaceAll(' ', '').length
@@ -49,20 +50,23 @@ const CreateListModal = ({ boardId }) => {
 
     return (
         <div className="create-list-container">
-            <form onSubmit={handleSubmit} className='list-form'>
-                <label className='list-title-field'>
-                    Enter list title...
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                        style={errors.title && { boxShadow: 'rgb(239, 92, 72) 0px 0px 0px 2px inset' }}
-                    />
-                    <span className='error-field'>{errors.title}</span>
-                </label>
-                <button type="submit" className='create-button'>Add List</button>
-            </form>
+            <div className="create-list-inner-container">
+                <form onSubmit={handleSubmit} className='list-form'>
+                    <label className='list-title-field'>
+                        Enter list title...
+                        <input
+                            className="list-input-text"
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                            style={errors.title && { boxShadow: 'rgb(239, 92, 72) 0px 0px 0px 2px inset' }}
+                        />
+                        <span className='error-field'>{errors.title}</span>
+                    </label>
+                    <button type="submit" className='create-button'>Add List</button>
+                </form>
+            </div>
         </div>
     )
 }

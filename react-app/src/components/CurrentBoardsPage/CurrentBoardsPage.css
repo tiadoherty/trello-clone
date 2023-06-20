@@ -12,6 +12,7 @@
     background-color: rgba(161, 189, 217, 0.08);
     border: none;
     border-radius: 3px;
+    min-height: 120px;
 }
 
 

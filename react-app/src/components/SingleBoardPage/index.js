@@ -40,7 +40,7 @@ const SingleBoardPage = () => {
             <ul className="lists-container" style={{ gridTemplateColumns: getCssGridColumns(singleBoard.lists.length + 1) }}>
                 {singleBoard.lists.map((list) => <List key={list.id} list={list} />)}
                 <OpenModalButton
-                    buttonText={<><i className="fas fa-plus" /> Add another list</>}
+                    buttonText={<><i className="fas fa-plus" /> Add a list</>}
                     modalComponent={<CreateListModal boardId={id} />}
                     className="add-list"
                 />
