@@ -6,6 +6,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 30px;
+    height: calc(100vh - 115px);
 }
 
 .left-grid {

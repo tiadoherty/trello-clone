@@ -8,7 +8,6 @@ function OpenModalButton({
   onModalClose, // optional: callback function that will be called once the modal is closed
   className
 }) {
-  console.log("Classname", className)
   const { setModalContent, setOnModalClose } = useModal();
 
   const onClick = () => {

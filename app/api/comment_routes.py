@@ -38,7 +38,7 @@ def create_comment():
         return {"errors": form.errors}, 400, {"Content-Type": "application/json"}
 
 #edit an existing comment
-@comment_routes.route("/update/<int:id>", methods=["PUT"])
+@comment_routes.route("/<int:id>/update", methods=["PUT"])
 @login_required
 def edit_comment(id):
     """

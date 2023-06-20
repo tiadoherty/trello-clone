@@ -1,0 +1,23 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.login-form label {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.login-form button {
+    margin: 10px 0;
+}
+
+.error-container {
+    margin: 0;
+}
+
+.demo-button {
+    margin: 0px 20px 20px 20px
+}

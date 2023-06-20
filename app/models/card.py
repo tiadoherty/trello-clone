@@ -1,8 +1,9 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import date
 
+
 class Card(db.Model):
-    __tablename__ = 'cards'
+    __tablename__ = "cards"
 
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}
@@ -12,13 +13,17 @@ class Card(db.Model):
     description = db.Column(db.Text)
     due_date = db.Column(db.Date)
     cover_image = db.Column(db.String)
-    list_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("lists.id")), nullable=False)
+    list_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod("lists.id")), nullable=False
+    )
 
     list = db.relationship("List", back_populates="cards")
-    comments = db.relationship("Comment", back_populates="card")
+    comments = db.relationship(
+        "Comment", back_populates="card", cascade="all, delete-orphan"
+    )
 
     def to_dict(self):
-        return{
+        return {
             "id": self.id,
             "title": self.title,
             "description": self.description,

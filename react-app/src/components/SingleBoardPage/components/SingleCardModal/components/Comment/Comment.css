@@ -1,0 +1,30 @@
+.edit-comment {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-text {
+    border-radius: 5px;
+    background-color: black;
+    padding: 8px;
+    margin: 0;
+}
+
+.comment-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-author {
+    margin-bottom: 3px;
+}
+
+.comment-single-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgb(182, 194, 207);
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: underline;
+}

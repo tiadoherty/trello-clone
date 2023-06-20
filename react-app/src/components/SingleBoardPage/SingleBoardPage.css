@@ -3,7 +3,7 @@
     padding: 20px;
     background-position: 50%;
     background-size: cover;
-    height: 100%;
+    height: calc(100vh - 56px);
     min-height: 600px;
     width: 100%;
 }

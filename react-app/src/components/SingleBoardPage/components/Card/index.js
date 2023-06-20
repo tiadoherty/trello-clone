@@ -6,6 +6,8 @@ import './Card.css'
 
 const Card = ({ card, listId }) => {
     console.log("Card", card)
+    //const numComments = useSelector(state => state.boards.singleBoard.lists.find(list => list.id === listId).cards.length)
+    //TODO: might need to update the singleboard slice of state somehow so that num comments is working properly 
     return (
         <div className="card">
             <div className="card-color" style={{ backgroundColor: card.cover_image }}></div>

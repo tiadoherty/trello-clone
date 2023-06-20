@@ -24,11 +24,17 @@ function LoginFormModal() {
     }
   };
 
+  const handleDemoButtonClick = async () => {
+    await dispatch(login('marnie@aa.io', 'password'))
+    closeModal()
+    history.push('/boards/current')
+  }
+
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h1>Log In</h1>
+        <ul className="error-container">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
@@ -53,6 +59,7 @@ function LoginFormModal() {
         </label>
         <button type="submit">Log In</button>
       </form>
+      <button onClick={() => handleDemoButtonClick()} className="demo-button">Log in as Demo User</button>
     </>
   );
 }

@@ -1,4 +1,10 @@
-.single-card-cover-img-preview{
+.single-card-background {
+    background-color: rgb(29, 33, 37);
+    height: 80vh;
+    overflow-y: auto;
+}
+
+.single-card-cover-img-preview {
     width: 100%;
     height: 60px;
 }
@@ -10,35 +16,72 @@
     margin-top: 0;
 }
 
-.single-card-container{
+.single-card-container {
     padding: 15px;
     width: 400px;
 }
 
-.single-card-list-title{
+.single-card-list-title {
     color: rgb(182, 194, 207);
     font-size: 14px;
     font-weight: 400;
 }
 
-.single-card-date{
+.single-card-date {
     color: rgb(182, 194, 207);
     font-size: 14px;
     font-weight: 600;
 }
 
-.date-warning{
+.date-warning {
     color: rgb(182, 194, 207);
     font-size: 14px;
 }
 
-.single-card-description-header{
+.single-card-description-header {
     color: rgb(182, 194, 207);
     font-size: 16px;
     font-weight: 600;
     margin-top: 45px;
 }
 
-.single-card-description{
+.single-card-description {
     color: rgb(182, 194, 207);
+}
+
+.single-card-comment-header {
+    color: rgb(182, 194, 207);
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+.comments-container {
+    color: rgb(182, 194, 207);
+    padding-right: 20px;
+}
+
+.write-comment-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.comment-text-area {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.add-comment-button {
+    background-color: rgb(87, 157, 255);
+    color: black;
+    border-radius: 3px;
+    border: none;
+    height: 30px;
+    width: 100px;
+    margin: 10px;
 }
