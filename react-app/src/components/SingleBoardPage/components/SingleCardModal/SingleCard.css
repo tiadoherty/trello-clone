@@ -86,10 +86,6 @@
     max-width: 350px;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
-
 .single-card-error {
     color: rgb(182, 194, 207);
     font-size: 14px;
