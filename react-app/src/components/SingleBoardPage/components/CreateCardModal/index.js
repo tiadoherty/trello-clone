@@ -32,8 +32,10 @@ const CreateCardModal = ({ listId, listTitle }) => {
 
         if (removeSpaces(title) === 0) errors["title"] = "❗Characters are required in the title"
         if (!title.length) errors["title"] = "👋 Card title is required"
+        if (title.length > 80) errors["title"] = "❗Title must be less than 80 characters"
         if (removeSpaces(description) === 0) errors["description"] = "❗Characters are required in the description"
         if (!description.length) errors["description"] = "👋 Description is required"
+        if (description.length > 300) errors["description"] = "❗Description must be less than 300 characters"
         if (dueDate === "YYYY-MM-DD") errors['dueDate'] = "❗Card due date is required!"
         if (new Date(dueDate) < Date.now()) errors['dueDate'] = "❗Due date must be in the future!"
         setErrors(errors)

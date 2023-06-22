@@ -11,7 +11,7 @@ const PublicLandingPage = () => {
         <div className="landing-page-container">
             <div className="grid-container">
                 <div className="left-grid">
-                    <h1 className='home-page-header'>Trello brings all your tasks, teammates, and tools together</h1>
+                    <h1 className='home-page-header'>NotTrello brings all your tasks, teammates, and tools together</h1>
                     <p className='home-page-text'>Keep everything in the same place, even if your team isn't.</p>
                     {/* this should be a modal button instead: */}
                     <OpenModalButton

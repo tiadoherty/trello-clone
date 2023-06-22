@@ -30,17 +30,21 @@ function SignupFormModal() {
 	useEffect(() => {
 		const errors = {}
 
-		if (username.length < 4) errors["username"] = "❗Please make sure your username is more than 4 characters"
+		if (username.length < 4 || username.length > 50) errors["username"] = "❗Please make sure your username is between 4-50 characters"
 		if (containsWhitespace(username)) errors["username"] = "❗Please do not include spaces in your username"
 		if (!username.length) errors["username"] = "👋 Username is required"
 		if (!firstName.length) errors["firstName"] = "👋 First name is required"
+		if (firstName.length > 50 || firstName.length < 2) errors["firstName"] = "❗First name must be between 2-50 characters"
 		if (containsWhitespace(firstName)) errors["firstName"] = "❗Please do not include spaces in your first name"
 		if (!lastName.length) errors["lastName"] = "👋 Last name is required"
+		if (lastName.length > 50 || lastName.length < 2) errors["lastName"] = "❗First name must be between 2-50 characters"
 		if (containsWhitespace(lastName)) errors["lastName"] = "❗Please do not include spaces in your last name"
 		if (!businessName.length) errors["businessName"] = "👋 Please indicated what business you will be using NotTrello for"
+		if (businessName.length > 80) errors["businessName"] = "❗Business name must be less than 80 characters"
 		if (removeSpaces(businessName) === 0) errors["businessName"] = "❗Please include characters in addition to spaces in your business's name"
 		if (!email.includes('@') || !email.includes('.')) errors["email"] = "❗Please include a valid email"
 		if (password.length < 6 || containsWhitespace(password)) errors["password"] = "❗Password must be at least 6 characters long and cannot contain spaces"
+		if (password.length > 50) errors["password"] = "❗Password must be less than 50 characters"
 		if (password !== confirmPassword) errors["password"] = "❗password and confirm password do not match"
 
 		setErrors(errors)

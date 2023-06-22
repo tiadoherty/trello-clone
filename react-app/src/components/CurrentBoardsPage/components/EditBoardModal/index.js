@@ -39,6 +39,7 @@ const EditBoardModal = ({ boardId }) => {
 
         if (removeSpaces(title) === 0) errors["title"] = "❗Characters are required in the title"
         if (!title.length) errors["title"] = "👋 Board title is required"
+        if (title.length > 80) errors["title"] = "❗Title must be less than 80 characters"
         setErrors(errors)
     }, [title])
 
@@ -71,35 +72,35 @@ const EditBoardModal = ({ boardId }) => {
 
     return (
         <div className="create-board-container">
-        <div className="inner-board-container">
-            <p className="create-board-title">Edit board below:</p>
-            <div className='trello-card-img-container'>
-                <div className="trello-card-img" style={{ backgroundImage: `url(${selectedImageUrl})` }}>
-                    <img src={TrelloOverlay} alt="" className="mock-trello-card" />
+            <div className="inner-board-container">
+                <p className="create-board-title">Edit board below:</p>
+                <div className='trello-card-img-container'>
+                    <div className="trello-card-img" style={{ backgroundImage: `url(${selectedImageUrl})` }}>
+                        <img src={TrelloOverlay} alt="" className="mock-trello-card" />
+                    </div>
                 </div>
+                <p>Background</p>
+                <div className="thumbnail-container">
+                    {image_urls.map((url) => {
+                        return <button onClick={() => setSelectedImageUrl(url)} className="background_thumbnail" style={{ 'background-image': `url(${url})`, 'objectFit': 'contain' }}></button>
+                    })}
+                </div>
+                <form onSubmit={handleSubmit} className='board-form'>
+                    <label className='board-title-field'>
+                        Board title
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                            style={errors.title && { boxShadow: 'rgb(239, 92, 72) 0px 0px 0px 2px inset' }}
+                        />
+                        <span className='error-field'>{errors.title}</span>
+                    </label>
+                    <button type="submit" className='create-button'>Update</button>
+                </form>
             </div>
-            <p>Background</p>
-            <div className="thumbnail-container">
-                {image_urls.map((url) => {
-                    return <button onClick={() => setSelectedImageUrl(url)} className="background_thumbnail" style={{ 'background-image': `url(${url})`, 'objectFit': 'contain' }}></button>
-                })}
-            </div>
-            <form onSubmit={handleSubmit} className='board-form'>
-                <label className='board-title-field'>
-                    Board title
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                        style={errors.title && { boxShadow: 'rgb(239, 92, 72) 0px 0px 0px 2px inset' }}
-                    />
-                    <span className='error-field'>{errors.title}</span>
-                </label>
-                <button type="submit" className='create-button'>Update</button>
-            </form>
         </div>
-    </div>
     )
 }
 

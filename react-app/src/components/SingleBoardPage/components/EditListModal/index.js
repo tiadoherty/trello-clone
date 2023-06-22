@@ -24,6 +24,7 @@ const EditListModal = ({ list }) => {
 
         if (removeSpaces(title) === 0) errors["title"] = "❗Characters are required in the title"
         if (!title.length) errors["title"] = "👋 List title is required"
+        if (title.length > 80) errors["title"] = "❗Title must be less than 80 characters"
         setErrors(errors)
     }, [title])
 
@@ -53,21 +54,24 @@ const EditListModal = ({ list }) => {
     }
 
     return (
-        <div className="edit-list-container">
-            <form onSubmit={handleSubmit} className='list-form'>
-                <label className='list-title-field'>
-                    Update list title...
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                        style={errors.title && { boxShadow: 'rgb(239, 92, 72) 0px 0px 0px 2px inset' }}
-                    />
-                    <span className='error-field'>{errors.title}</span>
-                </label>
-                <button type="submit" className='create-button'>Update List</button>
-            </form>
+        <div className="create-list-container">
+            <div className="create-list-inner-container">
+                <form onSubmit={handleSubmit} className='list-form'>
+                    <label className='list-title-field'>
+                        Update list title...
+                        <input
+                            className="list-input-text"
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                            style={errors.title && { boxShadow: 'rgb(239, 92, 72) 0px 0px 0px 2px inset' }}
+                        />
+                        <span className='error-field'>{errors.title}</span>
+                    </label>
+                    <button type="submit" className='create-button'>Update List</button>
+                </form>
+            </div>
         </div>
     )
 }
