@@ -11,6 +11,9 @@
 
 .list-container h4 {
     margin: 10px;
+    width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 
@@ -19,7 +22,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    white-space: nowrap;
+    box-sizing: border-box;
+    overflow: auto;
 }
 
 
