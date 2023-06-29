@@ -1,15 +1,16 @@
 import Card from '../Card'
 import './List.css'
+import { Droppable } from 'react-beautiful-dnd'
 import OpenModalButton from '../../../OpenModalButton';
 import DeleteListModal from '../DeleteListModal';
 import EditListModal from '../EditListModal';
 import CreateCardModal from '../CreateCardModal';
 
 const List = ({ list }) => {
-    console.log("List", list)
+
     return (
         <li className="list-container">
-            <div>
+            <div className='height-100'>
                 <div className='list-header-container'>
                     <h4>{list.title}</h4>
                     <div className='list-icon-container'>
@@ -25,7 +26,18 @@ const List = ({ list }) => {
                         />
                     </div>
                 </div>
-                {list.cards.map((card) => <Card card={card} listId={list.id}/>)}
+                <Droppable droppableId={list.id.toString()}>
+                    {(provided) => (
+                        <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                            className='height-100'
+                        >
+                            {list.cards.map((card, index) => <Card key={card.id} card={card} listId={list.id} index={index} />)}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
             </div>
             <OpenModalButton
                 buttonText={<><i className="fas fa-plus" /> Add a card</>}

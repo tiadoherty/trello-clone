@@ -13,6 +13,8 @@ const DELETE_LIST = 'lists/deleteList'
 const CREATE_CARD = 'cards/createCard'
 const DELETE_CARD = 'cards/deleteCard'
 const EDIT_CARD = 'cards/editCard'
+const REORDER_CARD = 'cards/reorderCard'
+const EDIT_CARD_LIST = 'cards/editCardList'
 
 // ---------- ACTION CREATORS ----------
 const getUserBoards = (boards) => {
@@ -102,6 +104,25 @@ const deleteCard = (cardId, listId) => {
         type: DELETE_CARD,
         cardId,
         listId
+    }
+}
+
+export const reorderCard = (listId, originalCardIndex, newCardIndex) => {
+    return {
+        type: REORDER_CARD,
+        listId,
+        originalCardIndex,
+        newCardIndex
+    }
+}
+
+const editCardList = (card, sourceListId, destinationListId, index) => {
+    return {
+        type: EDIT_CARD_LIST,
+        card,
+        sourceListId,
+        destinationListId,
+        index
     }
 }
 
@@ -282,7 +303,25 @@ export const editCardThunk = (cardFormData, cardId, listId) => async (dispatch) 
         return card;
     } else {
         const data = await res.json()
-        console.log("errors from delete list thunk -->", data)
+        console.log("errors from edit card thunk -->", data)
+        return data
+    }
+}
+
+// Edit a card by passing cardFormData, cardId, and listId
+export const editCardListThunk = (cardFormData, cardId, sourceListId, destinationListId, index) => async (dispatch) => {
+    const res = await fetch(`/api/cards/${cardId}/edit`, {
+        method: "PUT",
+        body: cardFormData
+    })
+
+    if (res.ok) {
+        const { card } = await res.json()
+        dispatch(editCardList(card, sourceListId, destinationListId, index))
+        return card;
+    } else {
+        const data = await res.json()
+        console.log("errors from edit card thunk -->", data)
         return data
     }
 }
@@ -298,7 +337,7 @@ export const deleteCardThunk = (cardId, listId) => async (dispatch) => {
         console.log("successfully deleted card from thunk")
     } else {
         const data = await res.json()
-        console.log("errors from delete list thunk -->", data)
+        console.log("errors from delete card thunk -->", data)
         return data
     }
 }
@@ -349,6 +388,60 @@ const boardReducer = (state = initialState, action) => {
             const cardToEditIndex = listToEditFrom.cards.findIndex((card) => card.id === action.cardId)
             listToEditFrom.cards.splice(cardToEditIndex, 1, action.card)
             return newListState
+        }
+        case REORDER_CARD: {
+            // First find the list to update
+            const listToChange = Object.assign({}, state.singleBoard.lists.find(list => list.id === action.listId))
+            // Get the cards within that list
+            const cardsToChange = Array.from(listToChange.cards)
+            // Get the card to reorder
+            const cardToMove = Object.assign({}, cardsToChange[action.originalCardIndex])
+            // Reorder the card to its new position
+            cardsToChange.splice(action.originalCardIndex, 1)
+            cardsToChange.splice(action.newCardIndex, 0, cardToMove)
+            // Update the original list with the newly positioned cards
+            listToChange.cards = cardsToChange
+            // Update the singleBoard lists property with the new list with new cards
+            const singleBoardLists = Array.from(state.singleBoard.lists)
+            const listToChangeIndex = state.singleBoard.lists.findIndex(list => list.id === action.listId)
+            singleBoardLists.splice(listToChangeIndex, 1)
+            singleBoardLists.splice(listToChangeIndex, 0, listToChange)
+            return {
+                ...state,
+                singleBoard: {
+                    ...state.singleBoard,
+                    lists: [
+                        ...singleBoardLists
+                    ]
+                }
+            }
+        }
+        case EDIT_CARD_LIST: {
+            // Splice card out of original list
+            const sourceList = Object.assign({}, state.singleBoard.lists.find(list => list.id === action.sourceListId))
+            const sourceCardIndex = sourceList.cards.findIndex(card => card.id === action.card.id)
+            sourceList.cards.splice(sourceCardIndex, 1)
+            // Put it back into new list
+            const destinationList = Object.assign({}, state.singleBoard.lists.find(list => list.id === action.destinationListId))
+            destinationList.cards.splice(action.index, 0, action.card)
+            // Now replace source list with the list missing the card
+            const sourceListIndex = state.singleBoard.lists.findIndex(list => list.id === action.sourceListId)
+            const singleBoardLists = Array.from(state.singleBoard.lists)
+            singleBoardLists.splice(sourceListIndex, 1)
+            singleBoardLists.splice(sourceListIndex, 0, sourceList)
+            // Also replace destination list with the list that now has the card
+            const destinationListIndex = state.singleBoard.lists.findIndex(list => list.id === action.destinationListId)
+            singleBoardLists.splice(destinationListIndex, 1)
+            singleBoardLists.splice(destinationListIndex, 0, destinationList)
+            return {
+                ...state,
+                singleBoard: {
+                    ...state.singleBoard,
+                    lists: [
+                        ...singleBoardLists
+                    ]
+                }
+            }
         }
         default:
             return state

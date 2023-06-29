@@ -100,6 +100,9 @@ def update_card(id):
         if data["due_date"]:
             update_card.due_date = data["due_date"]
 
+        if data["list_id"]:
+            update_card.list_id = data["list_id"]
+
         if data["cover_image"]:
             update_card.cover_image = data["cover_image"]
 
@@ -117,7 +120,7 @@ def update_card(id):
         return {"errors": form.errors}, 400, {"Content-Type": "application/json"}
 
 
-#get comments by card id
+# get comments by card id
 @card_routes.route("/<int:id>/comments")
 @login_required
 def get_card_comments(id):
@@ -127,4 +130,3 @@ def get_card_comments(id):
     card = Card.query.get(id).to_dict()
 
     return {"comments": card["comments"]}
-

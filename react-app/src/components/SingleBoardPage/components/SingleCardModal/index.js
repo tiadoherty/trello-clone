@@ -24,7 +24,7 @@ const SingleCardModal = ({ card }) => {
 
     useEffect(() => {
         dispatch(getCommentsThunk(card.id))
-    }, [dispatch])
+    }, [dispatch, card.id])
 
     useEffect(() => {
         const errors = {};
