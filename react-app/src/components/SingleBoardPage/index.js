@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -8,6 +8,7 @@ import { getSingleBoardThunk, reorderCard, editCardListThunk } from '../../store
 import OpenModalButton from "../OpenModalButton";
 import CreateListModal from "./components/CreateListModal";
 import './SingleBoardPage.css'
+import LoadingGIF from './loading.gif'
 
 // returns numColumns iterations of '1fr' joined by spaces
 // getCssGridColumns(3) -> '1fr 1fr 1fr'
@@ -29,7 +30,10 @@ const formatDate = (dateString) => {
 const SingleBoardPage = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(true)
+    //use selector to get all boards slice of state
     const singleBoard = useSelector(state => state.boards.singleBoard)
+    //key into all boards to get the correct board
 
     const onDragEnd = async result => {
         //TODO: reorder our list
@@ -62,16 +66,30 @@ const SingleBoardPage = () => {
             formData.append('due_date', formatDate(card.due_date))
             formData.append('cover_image', card.cover_image)
 
-            await dispatch(editCardListThunk(formData, card.id, sourceListId, destinationListId, destination.index))
+            await dispatch(editCardListThunk(formData, card, sourceListId, destinationListId, destination.index))
         }
     }
+
     useEffect(() => {
-        dispatch(getSingleBoardThunk(id))
+        async function fetchSingleBoard() {
+            await dispatch(getSingleBoardThunk(id))
+            setIsLoading(false)
+        }
+
+        fetchSingleBoard()
     }, [dispatch, id])
 
+    //dispatch get all boards
+    //use selector to get the single board
     console.log("Single board", singleBoard)
 
-    if (Object.keys(singleBoard).length === 0) return <h1>Loading board...</h1>
+    if (Object.keys(singleBoard).length === 0 || isLoading) {
+        return (
+            <div className="loading-screen">
+                <img src={LoadingGIF} alt="loading" />
+            </div>
+        )
+    }
 
     return (
         <div className="page" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(${singleBoard.background_image})` }}>

@@ -7,14 +7,14 @@ import TrelloOverlay from './trello_overlay.svg'
 import "./CreateBoardModal.css"
 
 const image_urls = [
-    "https://kickstarterclonebucket.s3.us-west-1.amazonaws.com/background_dolpin.jpg",
-    "https://kickstarterclonebucket.s3.us-west-1.amazonaws.com/background_forest.jpg",
-    "https://kickstarterclonebucket.s3.us-west-1.amazonaws.com/background_mountain.jpg",
-    "https://kickstarterclonebucket.s3.us-west-1.amazonaws.com/background_plant.jpg",
-    "https://kickstarterclonebucket.s3.us-west-1.amazonaws.com/background_dark_blue.jpg",
-    "https://kickstarterclonebucket.s3.us-west-1.amazonaws.com/background_white.jpg",
-    "https://kickstarterclonebucket.s3.us-west-1.amazonaws.com/background_orange.jpg",
-    "https://kickstarterclonebucket.s3.us-west-1.amazonaws.com/background_purple.jpg"
+    "https://trellobucket.s3.us-west-1.amazonaws.com/background_dolpin.jpg",
+    "https://trellobucket.s3.us-west-1.amazonaws.com/background_forest.jpg",
+    "https://trellobucket.s3.us-west-1.amazonaws.com/background_mountain.jpg",
+    "https://trellobucket.s3.us-west-1.amazonaws.com/background_plant.jpg",
+    "https://trellobucket.s3.us-west-1.amazonaws.com/background_dark_blue.jpg",
+    "https://trellobucket.s3.us-west-1.amazonaws.com/background_white.jpg",
+    "https://trellobucket.s3.us-west-1.amazonaws.com/background_orange.jpg",
+    "https://trellobucket.s3.us-west-1.amazonaws.com/background_purple.jpg"
 ]
 
 function removeSpaces(str) {

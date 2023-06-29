@@ -309,15 +309,16 @@ export const editCardThunk = (cardFormData, cardId, listId) => async (dispatch) 
 }
 
 // Edit a card by passing cardFormData, cardId, and listId
-export const editCardListThunk = (cardFormData, cardId, sourceListId, destinationListId, index) => async (dispatch) => {
-    const res = await fetch(`/api/cards/${cardId}/edit`, {
+export const editCardListThunk = (cardFormData, originalCard, sourceListId, destinationListId, index) => async (dispatch) => {
+    dispatch(editCardList(originalCard, sourceListId, destinationListId, index))
+
+    const res = await fetch(`/api/cards/${originalCard.id}/edit`, {
         method: "PUT",
         body: cardFormData
     })
 
     if (res.ok) {
         const { card } = await res.json()
-        dispatch(editCardList(card, sourceListId, destinationListId, index))
         return card;
     } else {
         const data = await res.json()
