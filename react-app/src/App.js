@@ -9,6 +9,7 @@ import CurrentBoardsPage from "./components/CurrentBoardsPage";
 import SingleBoardPage from "./components/SingleBoardPage";
 import AddMemberPage from "./components/AddMemberPage";
 import PublicLandingPage from "./components/PublicLandingPage"
+import NotFound from "./components/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function App() {
         <>
           <Navigation isLoggedIn={isLoggedIn} />
           <Switch>
-          <Route exact path="/" >
+            <Route exact path="/" >
               <PublicLandingPage />
             </Route>
             <Route path="/login" >
@@ -40,6 +41,9 @@ function App() {
             </Route>
             <Route exact path="/boards/:id/add-member">
               <AddMemberPage />
+            </Route>
+            <Route>
+              <NotFound />
             </Route>
           </Switch>
         </>

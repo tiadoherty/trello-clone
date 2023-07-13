@@ -1,0 +1,37 @@
+.footer-bar {
+    background-color: rgb(29, 33, 37);
+    color: rgb(182, 194, 207);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid rgba(159, 173, 188, 0.16);
+    padding: 20px;
+}
+
+.footer-title {
+    margin: 8px 0px;
+    font-size: 16px;
+    margin-right: 4px;
+}
+
+.person-container {
+    display: flex;
+    align-items: center;
+}
+
+.person-container>a {
+    color: rgb(182, 194, 207);
+    margin-right: 4px;
+}
+
+.link-container>a {
+    margin: 0 4px;
+}
+
+/* .portfolio-link {
+    color: rgb(182, 194, 207);
+    text-decoration: none;
+} */
+
+.fab {
+    color: rgb(182, 194, 207);
+    font-size: 20px;
+}

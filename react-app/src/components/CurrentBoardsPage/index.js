@@ -4,6 +4,7 @@ import { getUserBoardsThunk } from "../../store/boardReducer"
 
 import BoardCard from "./components/BoardCard";
 import './CurrentBoardsPage.css'
+import Footer from "../Footer";
 import OpenModalButton from "../OpenModalButton";
 import CreateBoardModal from "../CreateBoardModal";
 
@@ -22,17 +23,20 @@ const CurrentBoardsPage = () => {
     if (!userBoards) return <h3>Boards are loading...</h3>
 
     return (
-        <div className="page">
-            <h2 className="page-title">My Boards</h2>
-            <ul className="board-card-container">
-                <OpenModalButton
-                    buttonText="Create new board"
-                    modalComponent={<CreateBoardModal />}
-                    className="create-new-board-button"
-                />
-                {userBoardsArray.map((board) => <BoardCard board={board} key={board.id} />)}
-            </ul>
-        </div>
+        <>
+            <div className="page">
+                <h2 className="page-title">My Boards</h2>
+                <ul className="board-card-container">
+                    <OpenModalButton
+                        buttonText="Create new board"
+                        modalComponent={<CreateBoardModal />}
+                        className="create-new-board-button"
+                    />
+                    {userBoardsArray.map((board) => <BoardCard board={board} key={board.id} />)}
+                </ul>
+            </div>
+            <Footer />
+        </>
     )
 }
 
