@@ -1,5 +1,5 @@
 # NotTrello
-NotTrello is a full stack clone of Trello, a popular project management tool. Users of NotTrello can create project management boards with titled lists to hold task management cards. These cards can be commented on by coworkers, and dragged between lists. The focus of this project was clean styling and intuitive functionality. 
+NotTrello is a full stack clone of Trello, a popular project management tool. Users of NotTrello can create project boards with titled lists to hold task management cards. These cards can be commented on by coworkers, and dragged between lists. The focus of this project was clean styling and intuitive functionality. 
 
 Check out [NotTrello](https://not-trello.onrender.com/)
 
